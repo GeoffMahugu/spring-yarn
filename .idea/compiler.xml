@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="yarn-container" />
         <module name="yarn-client" />
         <module name="yarn-master" />
       </profile>
@@ -14,6 +15,7 @@
       <module name="demo" target="11" />
       <module name="yarn-appmaster" target="11" />
       <module name="yarn-client" target="11" />
+      <module name="yarn-container" target="11" />
       <module name="yarn-master" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -22,6 +24,7 @@
       <module name="demo" options="-parameters" />
       <module name="yarn-appmaster" options="-parameters" />
       <module name="yarn-client" options="-parameters" />
+      <module name="yarn-container" options="-parameters" />
       <module name="yarn-master" options="-parameters" />
     </option>
   </component>

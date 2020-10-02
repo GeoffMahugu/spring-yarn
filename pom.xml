@@ -6,6 +6,7 @@
 	<modules>
 		<module>yarn-client</module>
 		<module>yarn-master</module>
+		<module>yarn-container</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
