@@ -11,18 +11,26 @@ spring:
     client:
       startup:
         action: submit
-        localizer:
-          pattern:
-            - "*.jar"
+      localizer:
+        patterns:
+          - "*yarn-master*jar"
+          - "*yarn-master*zip"
+        zipPattern: "*zip"
+        propertiesNames: [ application ]
+        propertiesSuffixes: [ properties, yml ]
       files:
         - "file:yarn-container/target/yarn-container-0.0.1-SNAPSHOT.jar"
-        - "file:yarn-container/target/yarn-master-0.0.1-SNAPSHOT.jar"
+        - "file:yarn-master/target/yarn-master-0.0.1-SNAPSHOT.jar"
       launchcontext:
         archiveFile: yarn-master-0.0.1-SNAPSHOT.jar
     appmaster:
       containerCount: 1
       localizer:
-        pattern:
-          - "*.jar"
+        patterns:
+          - "*yarn-container*jar"
+          - "*yarn-container*zip"
+        zipPattern: "*zip"
+        propertiesNames: [ application ]
+        propertiesSuffixes: [ properties, yml ]
       launchcontext:
         archiveFile: yarn-container-0.0.1-SNAPSHOT.jar
