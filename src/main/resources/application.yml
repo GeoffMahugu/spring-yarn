@@ -1,17 +1,28 @@
 spring:
   hadoop:
-    fsUri: hdfs://localhost:900
+    fsUri: hdfs://localhost:9000
     resourceManagerHost: localhost
   yarn:
     appName: spring-yarn
     applicationDir: /app/spring-yarn/
+    fsUri: hdfs://localhost:9000
+    rmAddress: localhost:8032
+    schedulerAddress: localhost:8032
     client:
+      startup:
+        action: submit
+        localizer:
+          pattern:
+            - "*.jar"
       files:
         - "file:yarn-container/target/yarn-container-0.0.1-SNAPSHOT.jar"
         - "file:yarn-container/target/yarn-master-0.0.1-SNAPSHOT.jar"
       launchcontext:
-        archiveFile: yarn-boot-simple-appmaster-0.1.0.jar
+        archiveFile: yarn-master-0.0.1-SNAPSHOT.jar
     appmaster:
       containerCount: 1
+      localizer:
+        pattern:
+          - "*.jar"
       launchcontext:
-        archiveFile: yarn-boot-simple-container-0.1.0.jar
+        archiveFile: yarn-container-0.0.1-SNAPSHOT.jar
