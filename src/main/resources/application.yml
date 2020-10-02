@@ -1,14 +1,14 @@
 spring:
   hadoop:
-    fsUri: hdfs://localhost:8020
+    fsUri: hdfs://localhost:900
     resourceManagerHost: localhost
   yarn:
-    appName: yarn-boot-simple
-    applicationDir: /app/yarn-boot-simple/
+    appName: spring-yarn
+    applicationDir: /app/spring-yarn/
     client:
       files:
-        - "file:build/libs/yarn-boot-simple-container-0.1.0.jar"
-        - "file:build/libs/yarn-boot-simple-appmaster-0.1.0.jar"
+        - "file:yarn-container/target/yarn-container-0.0.1-SNAPSHOT.jar"
+        - "file:yarn-container/target/yarn-master-0.0.1-SNAPSHOT.jar"
       launchcontext:
         archiveFile: yarn-boot-simple-appmaster-0.1.0.jar
     appmaster:
