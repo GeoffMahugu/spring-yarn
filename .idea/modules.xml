@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yarn-appmaster/yarn-appmaster.iml" filepath="$PROJECT_DIR$/yarn-appmaster/yarn-appmaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-client/yarn-client.iml" filepath="$PROJECT_DIR$/yarn-client/yarn-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yarn-master/yarn-master.iml" filepath="$PROJECT_DIR$/yarn-master/yarn-master.iml" />
     </modules>
   </component>
 </project>
