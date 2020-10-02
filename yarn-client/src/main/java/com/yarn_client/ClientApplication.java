@@ -5,17 +5,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
-@RestController
+//@SpringBootApplication
+//@RestController
+//public class ClientApplication {
+//    @RequestMapping("/yarn-client")
+//    String home() {
+//        return "Hello from yarn client.";
+//    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(ClientApplication.class, args);
+//    }
+//}
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.yarn.client.YarnClient;
+
+@EnableAutoConfiguration
 public class ClientApplication {
 
-    @RequestMapping("/home")
-    String home() {
-        return "Hello World! Home page.";
-    }
-
     public static void main(String[] args) {
-        SpringApplication.run(ClientApplication.class, args);
+        SpringApplication.run(ClientApplication.class, args)
+                .getBean(YarnClient.class)
+                .submitApplication();
     }
 
 }
