@@ -22,13 +22,3 @@ spring:
         - "file:yarn_appmaster/target/yarn-appmaster-0.0.1-SNAPSHOT.jar"
       launchcontext:
         archiveFile: yarn-appmaster-0.0.1-SNAPSHOT.jar
-    appmaster:
-      containerCount: 1
-      localizer:
-        patterns:
-          - "*yarn-container*jar"
-          - "*yarn-container*zip"
-        zipPattern: "*zip"
-        propertiesNames: [ application ]
-        propertiesSuffixes: [ properties, yml ]
-      launchcontext:

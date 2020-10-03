@@ -32,3 +32,4 @@ spring:
         propertiesNames: [ application ]
         propertiesSuffixes: [ properties, yml ]
       launchcontext:
+        archiveFile: yarn-container-0.0.1-SNAPSHOT.jar
