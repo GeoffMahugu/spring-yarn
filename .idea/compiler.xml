@@ -8,12 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="yarn-fshell" />
         <module name="yarn-container" />
+        <module name="demo" />
         <module name="yarn-client" />
         <module name="yarn-master" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="1.8" />
+      <module name="demo" target="1.7" />
       <module name="yarn-appmaster" target="11" />
       <module name="yarn-client" target="1.8" />
       <module name="yarn-container" target="1.8" />
