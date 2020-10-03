@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/boot-fsshell.iml" filepath="$PROJECT_DIR$/boot-fsshell.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-client/yarn-client.iml" filepath="$PROJECT_DIR$/yarn-client/yarn-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-container/yarn-container.iml" filepath="$PROJECT_DIR$/yarn-container/yarn-container.iml" />
