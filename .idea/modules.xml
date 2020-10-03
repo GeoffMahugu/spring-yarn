@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-client/yarn-client.iml" filepath="$PROJECT_DIR$/yarn-client/yarn-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-container/yarn-container.iml" filepath="$PROJECT_DIR$/yarn-container/yarn-container.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yarn-fshell/yarn-fshell.iml" filepath="$PROJECT_DIR$/yarn-fshell/yarn-fshell.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-master/yarn-master.iml" filepath="$PROJECT_DIR$/yarn-master/yarn-master.iml" />
     </modules>
   </component>
