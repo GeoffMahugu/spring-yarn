@@ -7,25 +7,27 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="yarn-fshell" />
-        <module name="boot-fsshell" />
-        <module name="yarn-container" />
-        <module name="demo" />
         <module name="yarn-client" />
         <module name="yarn-master" />
+        <module name="yarn-container" />
+        <module name="demo" />
+        <module name="yarn.client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="boot-fsshell" target="1.7" />
+      <module name="boot-fsshell" target="1.8" />
       <module name="demo" target="1.7" />
       <module name="yarn-appmaster" target="11" />
       <module name="yarn-client" target="1.8" />
       <module name="yarn-container" target="1.8" />
       <module name="yarn-fshell" target="1.8" />
       <module name="yarn-master" target="1.8" />
+      <module name="yarn.client" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="boot-fsshell" options="" />
       <module name="demo" options="-parameters" />
       <module name="yarn-appmaster" options="-parameters" />
       <module name="yarn-client" options="-parameters" />
