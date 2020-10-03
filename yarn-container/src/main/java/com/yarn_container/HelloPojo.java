@@ -9,11 +9,13 @@ import org.springframework.data.hadoop.fs.FsShell;
 import org.springframework.yarn.annotation.OnContainerStart;
 import org.springframework.yarn.annotation.YarnComponent;
 
+
 @YarnComponent
 public class HelloPojo {
 
     private static final Log log = LogFactory.getLog(HelloPojo.class);
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private Configuration configuration;
 
@@ -21,8 +23,6 @@ public class HelloPojo {
     public void publicVoidNoArgsMethod() {
         log.info("Hello from HelloPojo");
         log.info("About to list from hdfs root content");
-
-        @SuppressWarnings("resource")
         FsShell shell = new FsShell(configuration);
         for (FileStatus s : shell.ls(false, "/")) {
             log.info(s);
