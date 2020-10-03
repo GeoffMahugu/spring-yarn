@@ -13,12 +13,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="11" />
+      <module name="demo" target="1.8" />
       <module name="yarn-appmaster" target="11" />
-      <module name="yarn-client" target="11" />
-      <module name="yarn-container" target="11" />
-      <module name="yarn-fshell" target="11" />
-      <module name="yarn-master" target="11" />
+      <module name="yarn-client" target="1.8" />
+      <module name="yarn-container" target="1.8" />
+      <module name="yarn-fshell" target="1.8" />
+      <module name="yarn-master" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
