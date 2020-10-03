@@ -9,7 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yarn.client</artifactId>
+    <artifactId>yarn_client</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-yarn-core</artifactId>
+            <version>2.2.0.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

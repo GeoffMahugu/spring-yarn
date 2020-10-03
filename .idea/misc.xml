@@ -9,6 +9,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/yarn-appmaster/pom.xml" />
+        <option value="$PROJECT_DIR$/yarn.client/pom.xml" />
       </set>
     </option>
   </component>

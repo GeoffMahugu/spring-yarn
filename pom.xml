@@ -5,10 +5,12 @@
     <groupId>demo</groupId>
     <artifactId>spring-yarn</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-<!--    <modules>-->
-<!--        <module>yarn.client</module>-->
-<!--    </modules>-->
-    <packaging>jar</packaging>
+    <modules>
+        <module>yarn_client</module>
+        <module>yarn_appmaster</module>
+        <module>yarn_container</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
