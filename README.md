@@ -2,11 +2,13 @@
 This documentation contains a multi-project configuration for a spring yarn application.
 
 # Prerequisites
-i) Java installed 8 >
+i) Java installed >= 8 
 
 ii) Basic knowledge on Spring boot.
 
 iii) Basics in Docker
+
+iv) Have Hadoop Cluster: [Docker Setup Docs](README-DOCKER.md)
 
 ### Basics on Hadoop
 
