@@ -12,8 +12,8 @@ spring:
     client:
       localizer:
         patterns:
-          - "*yarn-appmaster*jar"
-          - "*yarn-appmaster*zip"
+          - "*jar"
+          - "*zip"
         zipPattern: "*zip"
         propertiesNames: [ application ]
         propertiesSuffixes: [ properties, yml ]

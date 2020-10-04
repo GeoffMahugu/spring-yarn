@@ -12,23 +12,24 @@ spring:
     client:
       localizer:
         patterns:
-          - "*yarn-appmaster*jar"
-          - "*yarn-appmaster*zip"
+          - "*jar"
+          - "*zip"
         zipPattern: "*zip"
         propertiesNames: [ application ]
         propertiesSuffixes: [ properties, yml ]
       files:
-        - "file:yarn_container/target/yarn-container-0.0.1-SNAPSHOT.jar"
-        - "file:yarn_appmaster/target/yarn-appmaster-0.0.1-SNAPSHOT.jar"
+        - "file:yarn_container/target/yarn_container-0.0.1-SNAPSHOT.jar"
+        - "file:yarn_appmaster/target/yarn_appmaster-0.0.1-SNAPSHOT.jar"
       launchcontext:
-        archiveFile: yarn-appmaster-0.0.1-SNAPSHOT.jar
+        archiveFile: yarn_appmaster-0.0.1-SNAPSHOT.jar
     appmaster:
       containerCount: 1
       localizer:
         patterns:
-          - "*yarn-container*jar"
-          - "*yarn-container*zip"
+          - "*jar"
+          - "*zip"
         zipPattern: "*zip"
         propertiesNames: [ application ]
         propertiesSuffixes: [ properties, yml ]
       launchcontext:
+        archiveFile: yarn_container-0.0.1-SNAPSHOT.jar
