@@ -14,6 +14,11 @@ To run the hadoop cluster, we will run(in detatched mode):
 
 ``docker-compose up -d``
 
-or
+or build and bring up container:
 
-``docker-compose build -f  ``
+``docker-compose -f "docker-compose.yaml" up -d --build``
+
+
+To view the yarn resource manager, go to this url:
+
+``http://localhost:8088``
