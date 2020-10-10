@@ -7,9 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/yarn-container/yarn-container.iml" filepath="$PROJECT_DIR$/yarn-container/yarn-container.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-fshell/yarn-fshell.iml" filepath="$PROJECT_DIR$/yarn-fshell/yarn-fshell.iml" />
       <module fileurl="file://$PROJECT_DIR$/yarn-master/yarn-master.iml" filepath="$PROJECT_DIR$/yarn-master/yarn-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yarn_appmaster/yarn_appmaster.iml" filepath="$PROJECT_DIR$/yarn_appmaster/yarn_appmaster.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yarn_client/yarn_client.iml" filepath="$PROJECT_DIR$/yarn_client/yarn_client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yarn_container/yarn_container.iml" filepath="$PROJECT_DIR$/yarn_container/yarn_container.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="yarn_client" />
+        <module name="yarn_container" />
+        <module name="yarn_appmaster" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="boot-fsshell" target="1.8" />
       <module name="demo" target="1.7" />
@@ -10,9 +20,6 @@
       <module name="yarn-fshell" target="1.8" />
       <module name="yarn-master" target="1.8" />
       <module name="yarn.client" target="1.8" />
-      <module name="yarn_appmaster" target="1.8" />
-      <module name="yarn_client" target="1.8" />
-      <module name="yarn_container" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
