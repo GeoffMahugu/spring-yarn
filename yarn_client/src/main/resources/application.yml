@@ -2,6 +2,7 @@ spring:
   hadoop:
     fsUri: hdfs://localhost:9000
     resourceManagerHost: localhost
+    resourceManagerPort: 8032
   yarn:
     appName: spring-yarn
     applicationDir: /app/spring-yarn/
