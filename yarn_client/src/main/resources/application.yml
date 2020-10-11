@@ -3,6 +3,8 @@ spring:
     fsUri: hdfs://localhost:9000
     resourceManagerHost: localhost
     resourceManagerPort: 8032
+    config:
+      fs.defaultFS: hdfs://localhost:8020
   yarn:
     appName: spring-yarn
     applicationDir: /app/spring-yarn/
