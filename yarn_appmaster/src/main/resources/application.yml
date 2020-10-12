@@ -1,8 +1,8 @@
 spring:
   hadoop:
     fsUri: hdfs://localhost:9000
-    resourceManagerHost: localhost
-    resourceManagerPort: 8032
+    resourceManagerAddress: localhost:8032
+    jobHistoryAddress: localhost:8188
     config:
       fs.defaultFS: hdfs://localhost:8020
   yarn:
