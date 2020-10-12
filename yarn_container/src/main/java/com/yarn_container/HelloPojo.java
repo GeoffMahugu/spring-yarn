@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.hadoop.fs.FsShell;
 import org.springframework.yarn.annotation.OnContainerStart;
 import org.springframework.yarn.annotation.YarnComponent;
@@ -14,15 +15,23 @@ public class HelloPojo {
 
     private static final Log log = LogFactory.getLog(HelloPojo.class);
 
+//    @Autowired
+//    private Configuration configuration;
+
     @Autowired
-    private Configuration configuration;
+    private org.apache.hadoop.conf.Configuration hadoopConfiguration;
+
+    @Bean
+    public org.apache.hadoop.conf.Configuration hadoopConfiguration() {
+        return new org.apache.hadoop.conf.Configuration();
+    }
 
     @OnContainerStart
     public void publicVoidNoArgsMethod() throws Exception {
         log.info("Hello from HelloPojo");
         log.info("About to list from hdfs root content");
 
-        FsShell shell = new FsShell(configuration);
+        FsShell shell = new FsShell(hadoopConfiguration);
         for (FileStatus s : shell.ls(false, "/")) {
             log.info(s);
         }
