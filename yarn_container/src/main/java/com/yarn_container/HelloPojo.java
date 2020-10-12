@@ -15,14 +15,11 @@ public class HelloPojo {
 
     private static final Log log = LogFactory.getLog(HelloPojo.class);
 
-//    @Autowired
-//    private Configuration configuration;
-
     @Autowired
-    private org.apache.hadoop.conf.Configuration hadoopConfiguration;
+    private Configuration configuration;
 
     @Bean
-    public org.apache.hadoop.conf.Configuration hadoopConfiguration() {
+    public Configuration configuration() {
         return new org.apache.hadoop.conf.Configuration();
     }
 
@@ -31,7 +28,7 @@ public class HelloPojo {
         log.info("Hello from HelloPojo");
         log.info("About to list from hdfs root content");
 
-        FsShell shell = new FsShell(hadoopConfiguration);
+        FsShell shell = new FsShell(configuration);
         for (FileStatus s : shell.ls(false, "/")) {
             log.info(s);
         }
