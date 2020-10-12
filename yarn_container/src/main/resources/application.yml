@@ -2,11 +2,10 @@ spring:
   hadoop:
     fsUri: hdfs://localhost:9000
     resourceManagerAddress: localhost:8032
-    jobHistoryAddress: 
+    jobHistoryAddress:
     config:
       fs.defaultFS: hdfs://localhost:8020
-
-((HadoopConfigConfigurer)((HadoopConfigConfigurer)config.fileSystemUri(this.shp.getFsUri()).resourceManagerAddress(this.shp.getResourceManagerAddress()).jobHistoryAddress(this.shp.getJobHistoryAddress()).withProperties().properties(this.shp.getConfig()).and()).withResources().resources(this.shp.getResources()).and()).withSecurity().namenodePrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getNamenodePrincipal() : null).rmManagerPrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getRmManagerPrincipal() : null).authMethod(this.shp.getSecurity() != null ? this.shp.getSecurity().getAuthMethod() : null).userPrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getUserPrincipal() : null).userKeytab(this.shp.getSecurity() != null ? this.shp.getSecurity().getUserKeytab() : null);
+#((HadoopConfigConfigurer)((HadoopConfigConfigurer)config.fileSystemUri(this.shp.getFsUri()).resourceManagerAddress(this.shp.getResourceManagerAddress()).jobHistoryAddress(this.shp.getJobHistoryAddress()).withProperties().properties(this.shp.getConfig()).and()).withResources().resources(this.shp.getResources()).and()).withSecurity().namenodePrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getNamenodePrincipal() : null).rmManagerPrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getRmManagerPrincipal() : null).authMethod(this.shp.getSecurity() != null ? this.shp.getSecurity().getAuthMethod() : null).userPrincipal(this.shp.getSecurity() != null ? this.shp.getSecurity().getUserPrincipal() : null).userKeytab(this.shp.getSecurity() != null ? this.shp.getSecurity().getUserKeytab() : null);
 
   yarn:
     appName: spring-yarn
