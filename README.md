@@ -96,6 +96,10 @@ You will first need to build the project.
 
 ``mvn package``
 
+or repackage after first build:
+
+``sudo mvn clean package spring-boot:repackage``
+
 Run the client application.(The client application contains launch context for both YarnAppmaster & YarnContainer)
 
 ``cd yar_client/target/``
