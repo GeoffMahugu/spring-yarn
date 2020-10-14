@@ -14,15 +14,17 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/libs-release" }
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-hadoop-boot:2.2.0.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-log4j")
-    compile("org.springframework.boot:spring-boot-starter-ws")
+    compile("org.apache.hadoop:hadoop-common:2.2.0")
+    compile("org.springframework.data:spring-data-hadoop-boot:2.5.0.RELEASE")
+    compile("org.springframework.data:spring-data-hadoop-store:2.5.0.RELEASE")
 }
 
 compileJava {
