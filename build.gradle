@@ -32,6 +32,6 @@ compileJava {
     targetCompatibility=1.8
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
-}
+//task wrapper(type: Wrapper) {
+//    gradleVersion = '2.2.1'
+//}
