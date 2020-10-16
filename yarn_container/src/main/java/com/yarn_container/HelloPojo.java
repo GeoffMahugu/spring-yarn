@@ -13,7 +13,8 @@ import org.springframework.yarn.annotation.YarnComponent;
 @YarnComponent
 public class HelloPojo {
 
-    private static final Log log = LogFactory.getLog(HelloPojo.class);
+//    private static final Log log = LogFactory.getLog(HelloPojo.class);
+    private static  final Log log = LogFactory.getLog(HelloPojo.class);
 
     @Autowired
     private Configuration configuration;

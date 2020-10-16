@@ -15,7 +15,7 @@ public class DemoApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private FsShell shell;
+	private static FsShell shell;
 
 	@Override
 	public void run(String... args) {
