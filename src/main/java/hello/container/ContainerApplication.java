@@ -1,4 +1,4 @@
-package com.yarn_container;
+package hello.container;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class ContainerApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ContainerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(ContainerApplication.class, args);
+	}
 
-    @Bean
-    public HelloPojo helloPojo() {
-        return new HelloPojo();
-    }
+	@Bean
+	public HelloPojo helloPojo() {
+		return new HelloPojo();
+	}
 
 }

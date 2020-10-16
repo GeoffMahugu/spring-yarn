@@ -20,8 +20,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-hadoop-boot:2.2.0.RELEASE")
-    compile("org.springframework.boot:spring-boot-starter-log4j")
+    compile("org.springframework.data:spring-yarn-boot:2.2.0.RELEASE")
 }
 
 compileJava {
@@ -29,6 +28,53 @@ compileJava {
     targetCompatibility=1.7
 }
 
+task clientJar(type: Jar) {
+    appendix = 'client'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/appmaster/*')
+    exclude('**/container/*')
+}
+
+task appmasterJar(type: Jar) {
+    appendix = 'appmaster'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/client/*')
+    exclude('**/container/*')
+}
+
+task containerJar(type: Jar) {
+    appendix = 'container'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/appmaster/*')
+    exclude('**/client/*')
+}
+
+task clientBoot(type: BootRepackage, dependsOn: clientJar) {
+    withJarTask = clientJar
+    mainClass = 'hello.client.ClientApplication'
+}
+
+task appmasterBoot(type: BootRepackage, dependsOn: appmasterJar) {
+    withJarTask = appmasterJar
+    mainClass = 'hello.appmaster.AppmasterApplication'
+}
+
+task containerBoot(type: BootRepackage, dependsOn: containerJar) {
+    withJarTask = containerJar
+    mainClass = 'hello.container.ContainerApplication'
+}
+
+jar.enabled = false
+bootRepackage.enabled = false
+
+task bootJars
+bootJars.dependsOn = [clientBoot, appmasterBoot, containerBoot]
+
+build.dependsOn(bootJars)
+
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+    gradleVersion = $/2.5.13/$
 }
