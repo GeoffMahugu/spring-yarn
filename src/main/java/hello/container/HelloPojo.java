@@ -29,4 +29,9 @@ public class HelloPojo {
 		}
 	}
 
+//	@OnContainerStart
+//	public String publicStringNoArgsMethod() {
+//		return "COMPLETE";
+//	}
+
 }
