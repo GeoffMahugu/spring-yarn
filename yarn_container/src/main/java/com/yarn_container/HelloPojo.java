@@ -20,7 +20,7 @@ public class HelloPojo {
 
     @Bean
     public Configuration configuration() {
-        return new org.apache.hadoop.conf.Configuration();
+        return new Configuration();
     }
 
     @OnContainerStart
