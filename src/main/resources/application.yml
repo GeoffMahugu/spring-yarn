@@ -2,13 +2,20 @@ spring:
     hadoop:
         fsUri: hdfs://localhost:9000
         resourceManagerHost: localhost
+        resourceManagerAddress: localhost:8032
+        jobHistoryAddress: localhost:8188
+        config:
+            fs.defaultFS: hdfs://localhost:8020
     yarn:
         appName: yarn-boot-simple
         applicationDir: /app/yarn-boot-simple/
+        fsUri: hdfs://localhost:9000
+        rmAddress: localhost:8032
+        schedulerAddress: localhost:8032
         client:
             files:
-                - "file:target/yarn-boot-simple-container-0.1.0.jar"
-                - "file:target/yarn-boot-simple-appmaster-0.1.0.jar"
+                - "file:build/libs/yarn-boot-simple-container-0.1.0.jar"
+                - "file:build/libs/yarn-boot-simple-appmaster-0.1.0.jar"
             launchcontext:
                 archiveFile: yarn-boot-simple-appmaster-0.1.0.jar
         appmaster:

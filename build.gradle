@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "https://repo.spring.io/libs-release" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
@@ -14,9 +14,12 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+apply plugin: 'application'
+mainClassName = 'hello.client.ClientApplication'
+
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
+    maven { url "https://repo.spring.io/libs-release" }
 }
 
 dependencies {
@@ -24,8 +27,8 @@ dependencies {
 }
 
 compileJava {
-    sourceCompatibility=1.7
-    targetCompatibility=1.7
+    sourceCompatibility=1.8
+    targetCompatibility=1.8
 }
 
 task clientJar(type: Jar) {
@@ -75,6 +78,6 @@ bootJars.dependsOn = [clientBoot, appmasterBoot, containerBoot]
 
 build.dependsOn(bootJars)
 
-task wrapper(type: Wrapper) {
-    gradleVersion = $/2.5.13/$
+task buildWrapper(type: Wrapper) {
+    gradleVersion = '2.6.0'
 }
