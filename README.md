@@ -94,7 +94,7 @@ This section will utilise the 3 componets we created(YarnClient, YarnAppmaster, 
 
 You will first need to build the project.
 
-``mvn package``
+``mvn clean package``
 
 or repackage after first build:
 
