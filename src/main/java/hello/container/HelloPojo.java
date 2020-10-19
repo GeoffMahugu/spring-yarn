@@ -22,16 +22,9 @@ public class HelloPojo {
 		log.info("Hello from HelloPojo");
 		log.info("About to list from hdfs root content");
 
-		@SuppressWarnings("resource")
 		FsShell shell = new FsShell(configuration);
 		for (FileStatus s : shell.ls(false, "/")) {
 			log.info(s);
 		}
 	}
-
-//	@OnContainerStart
-//	public String publicStringNoArgsMethod() {
-//		return "COMPLETE";
-//	}
-
 }
