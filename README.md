@@ -5,7 +5,9 @@ This documentation contains a multi-project configuration for a spring for apach
 These are the other configurations branches:
 
 i ) [Gradle Local Build](https://github.com/GeoffMahugu/spring-yarn/tree/gradle-build) 
+
 ii) [Pom Local Build](https://github.com/GeoffMahugu/spring-yarn/tree/pom-build)
+
 iii) [Cluster Gradle Build](https://github.com/GeoffMahugu/spring-yarn/tree/gradle/cluster-build)
 
 # Prerequisites
