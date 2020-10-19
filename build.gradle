@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "https://repo.spring.io/libs-release" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
@@ -14,21 +14,70 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+apply plugin: 'application'
+mainClassName = 'hello.client.ClientApplication'
+
 repositories {
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
+    maven { url "https://repo.spring.io/libs-release" }
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-hadoop-boot:2.2.0.RELEASE")
-    compile("org.springframework.boot:spring-boot-starter-log4j")
+    compile("org.springframework.data:spring-yarn-boot:2.2.0.RELEASE")
 }
 
 compileJava {
-    sourceCompatibility=1.7
-    targetCompatibility=1.7
+    sourceCompatibility=1.8
+    targetCompatibility=1.8
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+task clientJar(type: Jar) {
+    appendix = 'client'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/appmaster/*')
+    exclude('**/container/*')
+}
+
+task appmasterJar(type: Jar) {
+    appendix = 'appmaster'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/client/*')
+    exclude('**/container/*')
+}
+
+task containerJar(type: Jar) {
+    appendix = 'container'
+    baseName = 'yarn-boot-simple'
+    from sourceSets.main.output
+    exclude('**/appmaster/*')
+    exclude('**/client/*')
+}
+
+task clientBoot(type: BootRepackage, dependsOn: clientJar) {
+    withJarTask = clientJar
+    mainClass = 'hello.client.ClientApplication'
+}
+
+task appmasterBoot(type: BootRepackage, dependsOn: appmasterJar) {
+    withJarTask = appmasterJar
+    mainClass = 'hello.appmaster.AppmasterApplication'
+}
+
+task containerBoot(type: BootRepackage, dependsOn: containerJar) {
+    withJarTask = containerJar
+    mainClass = 'hello.container.ContainerApplication'
+}
+
+jar.enabled = false
+bootRepackage.enabled = false
+
+task bootJars
+bootJars.dependsOn = [clientBoot, appmasterBoot, containerBoot]
+
+build.dependsOn(bootJars)
+
+task buildWrapper(type: Wrapper) {
+    gradleVersion = '2.6.0'
 }
