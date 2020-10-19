@@ -1,5 +1,5 @@
-# Spring Hahoop 
-This documentation contains a multi-project configuration for a spring yarn application.
+# Spring For Apache Hahoop Demo
+This documentation contains a multi-project configuration for a spring for apache hadoop application.
 
 # Prerequisites
 i) Java installed >= 8 
@@ -19,7 +19,8 @@ Hadoop has 3 components Yarn, HDFS and MapReduce.
 [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html) :- is a distributed file system.
 
 [MapReduce](https://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html) :- is a framework for writing applications that process vast amount of data in parallel and multiple nodes in a reliable, fault-tolerant manner.
-                                                                                                                       
+
+
 ### Basics on Spring Yarn
 
 Ref: https://docs.spring.io/spring-hadoop/docs/current/reference/html/springandhadoop-yarn.html
@@ -29,12 +30,12 @@ Spring Yarn is the configuration for setting up a yarn application abstructing t
 A spring yarn application consists of 3 components:
 
 **YarnClient** :- Responsible for issuing the jobs(application) to YarnResourceManager, listing and killing of the jobs.
-            - Defines launch context(commands to start the container) for YarnAppmaster & YarnContainer 
-            
+            - Defines launch context(commands to start the container) for YarnAppmaster & YarnContainer.
+
 **YarnAppmaster** :- Communicates with YarnResourceManager to start & stop YarnContainer
                - Defines the launch context for YarnContainer
 
-**YarnContainer** :- Wrapper for the application(Worker). 
+**YarnContainer** :- Wrapper for the application(Worker).
 
 ### Project Structure
 This setup follows spring-yarn implementation of a multi project setup where we will create the 3 applications as modules that can be built seperately.
@@ -43,7 +44,7 @@ This setup follows spring-yarn implementation of a multi project setup where we 
 1. I'm using maven as the project builder. (gradle will fail no longer supports v2)
 2. Subsequent Yarn configurations are found in resources folder. eg for YarnClient (yarn_client/src/main/resources/application.yml)
 3. Using an older version of spring-boot(1.2.3.RELEASE) upgrading to the latest version breaks the application.
-
+4. The configurations are pointed to the local hadoop configuration.
 
 root-project
 
@@ -63,6 +64,13 @@ root-project
         - /src/main/java (application logic)
         - /src/main/resources/application.yml (yarn configuration)
 
+### Build Project
+
+To build the project run(in root of project):
+
+``./gradlew clean build``
+
+This will build the main application along with the 3 yarn applications in ``/build`` folder.
 
 ### Run Project
 To run the project(in root folder):
@@ -73,7 +81,7 @@ To run the project(in root folder):
 
 To build the project run(in root of project):
 
-``mvn package``
+``mvn clean package``
 
 This will build the main application along with the 3 yarn applications.
 
@@ -89,7 +97,7 @@ The code is located in this folder. (root-folder/src/main/java/demo/DemoApplicat
 Run the java file (DemoApplication) which will display the contents at the root of your HDFS. 
 
 
-### 2. Issue Job to Hadoop
+### 2. Submit Job to Hadoop
 This section will utilise the 3 componets we created(YarnClient, YarnAppmaster, YarnContainer) in order to issue a job to the cluster.
 
 You will first need to build the project.
@@ -105,16 +113,3 @@ Run the client application.(The client application contains launch context for b
 ``cd yar_client/target/``
 
 ``java -jar yarn_client-0.0.1-SNAPSHOT.jar``
-
-Go to this url to confirm the job has been issued(assuming you have a local Hadoop application running):
-
-``http://localhost:8088``
-
-### Resources:
-
-1. [Hadoop Structure Explained](https://www.youtube.com/watch?v=ZFbkNY6Xn94&ab_channel=COSOI)
-2. [Hadoop Full Port Mapping](https://www.stefaanlippens.net/hadoop-3-default-ports.html)
-3. [Hadoop on Docker](https://www.youtube.com/watch?v=dLTI2HN9Ejg&ab_channel=NextGenLearning)
-4. [Intro to Spring Yarn](https://spring.io/blog/2013/09/10/introducing-the-spring-yarn-framework-for-developing-apache-hadoop-yarn-applications)
-5. [Spring Yarn Setup: - Painless build](https://www.youtube.com/watch?v=qlvX7_r9aUA&ab_channel=SpringDeveloper)
-6. [Spring Yarn Full Documentation](https://docs.spring.io/spring-hadoop/docs/current/reference/html/springandhadoop-yarn.html)
