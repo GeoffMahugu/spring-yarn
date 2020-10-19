@@ -1,4 +1,4 @@
-# Spring Hahoop 
+# Spring For Apache Hahoop Demo
 This documentation contains a multi-project configuration for a spring for apache hadoop application.
 
 # Prerequisites
