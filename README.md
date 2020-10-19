@@ -138,6 +138,10 @@ To submit the application to yarn resource manager, run the client application.(
 
 ``java -jar build/libs/yarn-boot-simple-client-0.1.0.jar``
 
+To check on status of the application, go to:
+
+``http://192.168.1.119:32457/``
+
 ### Resources:
 
 1. [Hadoop Structure Explained](https://www.youtube.com/watch?v=ZFbkNY6Xn94&ab_channel=COSOI)
