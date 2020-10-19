@@ -1,0 +1,170 @@
+### --------------------
+### --------------------
+### CONFIGS SETUP
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: neo4j-config
+  labels:
+    app: neo4j
+data:
+  NEO4J_dbms_security_procedures_unrestricted: algo.*
+  NEO4J_dbms_directories_plugins: plugins
+  NEO4J_apoc_import_file_enabled: "true"
+  NEO4J_AUTH: neo4j/agilion2018!
+  NEO4J_HEAP_MEMORY: 4G
+  NEO4JLABS_PLUGINS: "['apoc', 'graph-algorithms']"
+---
+### --------------------
+### STORAGE SETUP
+### --------------------
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j-data-claim
+  labels:
+    type: local
+    app: neo4j
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 5Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: neo4j-plugin-claim
+  labels:
+    type: local
+    app: neo4j
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 2Gi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: neo4j-0
+  labels:
+    type: local
+    app: neo4j
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - agilion-2
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: neo4j-1
+  labels:
+    type: local
+    app: neo4j
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - agilion-2
+---
+### --------------------
+### SERVICE SETUP
+### --------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j
+  labels:
+    app: neo4j
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 7474
+      targetPort: 7474
+      name: http
+    - protocol: TCP
+      port: 7473
+      targetPort: 7473
+      name: https
+    - protocol: TCP
+      port: 7687
+      targetPort: 7687
+      name: bolt
+  selector:
+    app: neo4j
+---
+### --------------------
+### DEPLOYMENT SETUP
+### --------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: neo4j
+  name: neo4j
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: neo4j
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      volumes:
+        - name: neo4j-data
+          persistentVolumeClaim:
+            claimName: neo4j-data-claim
+        - name: neo4j-plugins
+          persistentVolumeClaim:
+            claimName: neo4j-plugin-claim
+      containers:
+        - name: neo4j
+          image: neo4j:3.5.12
+          ports:
+            - containerPort: 7474
+              name: http
+            - containerPort: 7687
+              name: bolt
+            - containerPort: 7473
+              name: https
+          volumeMounts:
+            - name: neo4j-data
+              mountPath: /var/lib/neo4j/data
+            - name: neo4j-plugins
+              mountPath: /plugins
+      restartPolicy: Always
+

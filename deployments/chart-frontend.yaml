@@ -1,0 +1,55 @@
+### -------------------
+### -------------------
+### SERVICE SETINGS
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend-app
+    tier: frontend
+spec:
+  type: NodePort
+  selector:
+    app: frontend-app
+    tier: frontend
+  ports:
+    - nodePort: 31000
+      port: 80
+      targetPort: 80
+      protocol: TCP
+---
+### -------------------
+### DEPLOYMENT SETINGS
+### -------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+  labels:
+    app: frontend-app
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+      tier: frontend
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+        tier: frontend
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: registry.gitlab.com/agilion/agilion-web/dev
+          imagePullPolicy: Always
+          name: a-web-api
+          ports:
+            - containerPort: 80
+              protocol: TCP
+

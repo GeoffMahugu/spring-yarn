@@ -1,0 +1,143 @@
+### -------------------
+### CONFIGS SETINGS
+### -------------------
+# First install the secret key for GitLab
+# kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username=geoffreymahugu@gmail.com --docker-password=Gravedigger96 --docker-email=geoffreymahugu@gmail.com
+# To encode any characters, use ``echo -n "STRING" | base64``
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: neo-secrets
+  labels:
+    app: neo4j
+type: Opaque
+data:
+  username: bmVvNGo=
+  password: YWdpbGlvbjIwMTgh
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: psql-secrets
+  labels:
+    app: postgres
+type: Opaque
+data:
+  username: cG9zdGdyZXM=
+  password: YWdpbGlvbjIwMTgh
+  port: MzEzMTAK
+---
+### -------------------
+### SERVICE SETINGS
+### -------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  labels:
+    app: agilion-api
+    tier: backend
+spec:
+  type: NodePort
+  selector:
+    app: agilion-api
+    tier: backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+---
+### -------------------
+### DEPLOYMENT SETINGS
+### -------------------
+apiVersion: v1
+kind: Deployment
+metadata:
+  labels:
+    app: agilion-api
+    tier: backend
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agilion-api
+      tier: backend
+      kubernetes.io/role: slave
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: agilion-api
+        tier: backend
+        kubernetes.io/role: slave
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - env:
+            - name: spring.datasource.url
+              value: jdbc:postgresql://192.168.238.120:5432/ag_travel
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secrets
+                  key: username
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secrets
+                  key: password
+            - name: spring.datasource.port
+              valueFrom:
+                secretKeyRef:
+                  name: psql-secrets
+                  key: port
+            - name: spring.jpa.properties.hibernate.dialect
+              value: org.hibernate.dialect.PostgreSQLDialect
+            - name: spring.jpa.hibernate.ddl-auto
+              value: update
+            - name: logging.level.org.springframework.web
+              value: info
+            - name: logging.level.com
+              value: info
+            - name: logging.level.org.hibernate.stat
+              value: info
+            - name: logging.level.org.hibernate.type
+              value: trace
+            - name: spring.jpa.show-sql
+              value: "true"
+            - name: logging.level.org.springframework
+              value: DEBUG
+            - name: spring.jpa.properties.hibernate.generate_statistics
+              value: "true"
+            - name: spring.jpa.properties.hibernate.enable_lazy_load_no_trans
+              value: "true"
+            - name: spring.jpa.properties.hibernate.format_sql
+              value: "true"
+            - name: spring.data.neo4j.password
+              valueFrom:
+                secretKeyRef:
+                  name: neo-secrets
+                  key: password
+            - name: spring.data.neo4j.username
+              valueFrom:
+                secretKeyRef:
+                  name: neo-secrets
+                  key: username
+            - name: spring.data.neo4j.uri
+              value: bolt://192.168.238.111:7687
+            - name: traveler.api.file.store.location
+              value: /opt/traveler/APIdata
+            - name: traveler.api.retryCount
+              value: "5"
+          name: api
+          image: registry.gitlab.com/agilion/agilion-server/travel/local:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+

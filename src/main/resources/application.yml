@@ -1,17 +1,13 @@
 spring:
     hadoop:
-        fsUri: hdfs://localhost:9000
-        resourceManagerHost: localhost
-        resourceManagerAddress: localhost:8032
-        jobHistoryAddress: localhost:8188
-        config:
-            fs.defaultFS: hdfs://localhost:8020
+        fsUri: hdfs://192.168.1.119:30051
+        resourceManagerHost: 192.168.1.119
+        resourceManagerAddress: 192.168.1.119:32458
     yarn:
         appName: yarn-boot-simple
         applicationDir: /app/yarn-boot-simple/
-        fsUri: hdfs://localhost:9000
-        rmAddress: localhost:8032
-        schedulerAddress: localhost:8032
+        fsUri: hdfs://192.168.1.119:30051
+        rmAddress: 192.168.1.119:32458
         client:
             files:
                 - "file:build/libs/yarn-boot-simple-container-0.1.0.jar"

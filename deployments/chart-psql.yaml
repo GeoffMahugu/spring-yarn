@@ -1,0 +1,117 @@
+### --------------------
+### --------------------
+### CONFIGS SETUP
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: psql-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: ag_travel
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: agilion2018!
+---
+### --------------------
+### STORAGE SETUP
+### --------------------
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgredb-claim
+  labels:
+    type: local
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 5Gi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgredb-postgresql-0
+  labels:
+    type: local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data/psql"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - agilion-2
+---
+### --------------------
+### SERVICE SETUP
+### --------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 5432
+      nodePort: 31310
+      protocol: TCP
+  selector:
+    app: postgres
+---
+### --------------------
+### STATEFUL SETUP
+### --------------------
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+  labels:
+    app: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          envFrom:
+            - configMapRef:
+                name: psql-config
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+              port: 5432
+          volumeMounts:
+            - name: postgredb
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgredb-claim
+      nodeSelector:
+        kubernetes.io/role: slave
+        kubernetes.io/os: linux
+

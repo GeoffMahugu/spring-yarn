@@ -28,10 +28,4 @@ public class HelloPojo {
 			log.info(s);
 		}
 	}
-
-//	@OnContainerStart
-//	public String publicStringNoArgsMethod() {
-//		return "COMPLETE";
-//	}
-
 }
